@@ -1,0 +1,155 @@
+<div class="container py-5" *ngIf="visibilidadeTabela">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Lista de Pessoas</h5>
+      <button 
+        type="button" 
+        class="btn btn-sm btn-light" 
+        (click)="ExibirFormularioCadastro()"
+        aria-label="Adicionar nova pessoa">
+        <i class="bi bi-person-plus"></i> Nova Pessoa
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table 
+          class="table table-striped table-hover table-sm align-middle" 
+          *ngIf="pessoas" 
+          aria-describedby="tabelaPessoas">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Sobrenome</th>
+              <th scope="col">Idade</th>
+              <th scope="col">Profissão</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pessoa of pessoas">
+              <td>{{ pessoa.nome }}</td>
+              <td>{{ pessoa.sobreNome }}</td>
+              <td>{{ pessoa.idade }}</td>
+              <td>{{ pessoa.profissao }}</td>
+              <td>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-info me-2"
+                  aria-label="Atualizar pessoa" 
+                  (click)="ExibirFormularioAtualizacao(pessoa.pessoaId)"> 
+                  <i class="bi bi-pencil"></i> Atualizar
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-danger"
+                  aria-label="Excluir pessoa" 
+                  (click)="ExibirConfirmacaoExclusao(pessoa.pessoaId, pessoa.nome, conteudoModal)">
+                  <i class="bi bi-trash"></i> Excluir
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!pessoas.length" class="text-center py-3">
+        <p class="text-muted mb-0">Nenhuma pessoa encontrada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5" *ngIf="visibilidadeForm">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12 border-light rounded py-4 px-5 shadow-lg" *ngIf="formulario">
+      <!-- Título do Formulário -->
+      <h2 class="mb-3 text-center text-primary">{{ tituloformulario }}</h2>
+      <p class="text-muted text-center">Preencha as informações abaixo para salvar os dados da pessoa.</p>
+      <hr />
+
+      <!-- Início do Formulário -->
+      <form [formGroup]="formulario" role="form" (ngSubmit)="EnviarFormulario()">
+        <div class="form-group mb-3">
+          <label for="nomeInput">Nome</label>
+          <input
+            id="nomeInput"
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="nome"
+            placeholder="Digite o nome"
+            aria-label="Nome"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="sobrenomeInput">Sobrenome</label>
+          <input
+            id="sobrenomeInput"
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="sobrenome"
+            placeholder="Digite o sobrenome"
+            aria-label="Sobrenome"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="idadeInput">Idade</label>
+          <input
+            id="idadeInput"
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="idade"
+            placeholder="Digite a idade"
+            aria-label="Idade"
+          />
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="profissaoInput">Profissão</label>
+          <input
+            id="profissaoInput"
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="profissao"
+            placeholder="Digite a profissão"
+            aria-label="Profissão"
+          />
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button
+            type="submit"
+            class="btn btn-sm btn-outline-primary"
+            aria-label="Salvar dados da pessoa"
+          >
+            Salvar
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-light"
+            aria-label="Voltar à página anterior" (click)="Voltar()"
+          >
+            Voltar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #conteudoModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmação de exclusão</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Prosseguir com a exclusão do(a) {{nomePessoa}}?
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modalRef.hide()">Não</button>
+    <button type="button" class="btn btn-outline-danger" (click)="ExcluirPessoa(pessoaId)">Sim</button>
+  </div>
+</ng-template>
