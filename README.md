@@ -14,8 +14,10 @@ Este é um projeto de gerenciamento de dados de pessoas, desenvolvido com o obje
 - **Backend:** .NET, Entity Framework.
 - **Banco de Dados:** MySQL.
 
-##**Tela Lista todos:**
+##Telas
+
+###**Lista todos:**
 ![image](https://github.com/user-attachments/assets/1f24b425-ada1-49da-88ab-ed6d0b7fec02)
 
-##**Tela Inserir e Editar:**
+###**Inserir e Editar:**
 ![image](https://github.com/user-attachments/assets/d35cc832-9c85-4e0a-b5a1-be3f8231fa25)
