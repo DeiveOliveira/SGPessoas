@@ -1,7 +1,7 @@
 export class Pessoa{
     pessoaId: number = 0;
     nome: string = "";
-    sobreNome: string = "";
+    sobrenome: string = "";
     idade: number = 0;
     profissao: string = "";
   }

@@ -10,7 +10,7 @@ namespace CRUDAPI.Models
         public string? Nome { get; set; }
         [Required]
         [StringLength(80)]
-        public string SobreNome { get; set; }
+        public string Sobrenome { get; set; }
 
         public int Idade { get; set; }
         [Required]

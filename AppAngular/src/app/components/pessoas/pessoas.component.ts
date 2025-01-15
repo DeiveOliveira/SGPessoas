@@ -82,12 +82,12 @@ export class PessoasComponent implements OnInit{
       this.visibilidadeTabela = false;
       this.visibilidadeForm = true;
 
-      this.PessoasService.PegarPeloId(pessoaId).subscribe(result => {this.tituloformulario = `Atualizar ${result.nome} ${result.sobreNome}`;
+      this.PessoasService.PegarPeloId(pessoaId).subscribe(result => {this.tituloformulario = `Atualizar ${result.nome} ${result.sobrenome}`;
 
         this.formulario = new FormGroup({
           pessoaId: new FormControl(result.pessoaId),
           nome: new FormControl(result.nome),
-          sobreNome: new FormControl(result.sobreNome),
+          sobrenome: new FormControl(result.sobrenome),
           idade: new FormControl(result.idade),
           profissao: new FormControl(result.profissao)
         });
